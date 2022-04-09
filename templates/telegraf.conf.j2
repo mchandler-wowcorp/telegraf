@@ -77,14 +77,37 @@
   ## If set to true, do no set the "host" tag in the telegraf agent.
   omit_hostname = {{ telegraf_omit_hostname }}
 
+  ## Choice of SNMP Translator
+  snmp_translator = "{{ telegraf_snmp_translator }}"
+
+
 ###############################################################################
 #                                  OUTPUTS                                    #
 ###############################################################################
 
 [outputs]
 
+{%  if telegraf_http == true %}
+[[outputs.http]]
+
+   ## URL is the address to send metrics to
+   url = "{{ telegraf_http_url }}
+   data_format = "{{ telegraf_http_dataformat }}"
+   ## Provides time, index, source overrides for the HEC
+   splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
+   splunkmetric_multimetric = "{{ telegraf_http_splunkmetric_multimetric }}"
+
+   ## Additional HTTP headers
+    [outputs.http.headers]
+      # Should be set manually to "application/json" for json data_format
+      Content-Type = "{{ telegraf_http_headers_ctype }}"
+      Authorization = "{{ telegraf_http_headers_auth }}"
+      X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
+
+{% endif %}
+
 # Configuration for influxdb server to send metrics to
-{% if telegraf_influxdb_v2 != true %}
+{% if telegraf_influxdb_v1 == true %}
 [[outputs.influxdb]]
   # The full HTTP or UDP endpoint URL for your InfluxDB instance.
   # Multiple urls can be specified but it is assumed that they are part of the same
