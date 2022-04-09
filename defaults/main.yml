@@ -27,7 +27,21 @@ telegraf_quiet: "false"
 telegraf_hostname:
 telegraf_omit_hostname: "false"
 telegraf_install_url:
+telegraf_snmp_translator: "gosmi"
 
+# for http output
+# telegraf_splunk_hec_host and telegraf_splunk_hec_token should come from an ansible_vault
+telegraf_http: true
+telegraf_http_url: "https://{{ telegraf_splunk_hec_host }}/services/collector/raw?sourcetype=telegraf"
+telegraf_http_dataformat: "splunkmetric"
+telegraf_http_splunkmetric_hec_routing: "true"
+telegraf_http_splunkmetric_multimetric: "false"
+telegraf_http_headers_ctype: "application/json"
+telegraf_http_headers_auth: "Splunk {{ telegraf_splunk_hec_token }}"
+telegraf_http_headers_xsrc: "snmpchannel"
+
+# for influxdb output
+telegraf_influxdb_v1: false
 telegraf_influxdb_urls:
   - http://localhost:8086
 telegraf_influxdb_database: telegraf
@@ -45,37 +59,45 @@ telegraf_influxdb_password:
 telegraf_influxdb_user_agent:
 telegraf_influxdb_udp_payload:
 
-# for v2 output
+# for influxdb v2 output
 telegraf_influxdb_v2: false
 telegraf_influxdb_token:
 telegraf_influxdb_organization:
 telegraf_influxdb_bucket:
 
-telegraf_plugins_base:
-  - name: mem
-  - name: system
-  - name: cpu
-    options:
-      percpu: "true"
-      totalcpu: "true"
-      fielddrop:
-        - "time_*"
-  - name: disk
-    options:
-      mountpoints:
-        - "/"
-  - name: diskio
-    options:
-      skip_serial_number: "true"
-  - name: procstat
-    options:
-      exe: "influxd"
-      prefix: "influxdb"
-  - name: net
-    options:
-      interfaces:
-        - "eth0"
+# telegraf_plugins_base:
+#   - name: mem
+#   - name: system
+#   - name: cpu
+#     options:
+#       percpu: "true"
+#       totalcpu: "true"
+#       fielddrop:
+#         - "time_*"
+#   - name: disk
+#     options:
+#       mountpoints:
+#         - "/"
+#   - name: diskio
+#     options:
+#       skip_serial_number: "true"
+#   - name: procstat
+#     options:
+#       exe: "influxd"
+#       prefix: "influxdb"
+#   - name: net
+#     options:
+#       interfaces:
+#         - "eth0"
 
-telegraf_plugins: "{{ telegraf_plugins_base }} + {{ telegraf_plugins_extra | default([]) }}"
+telegraf_plugins_extras:
+## Receive SNMP traps
+  - name: snmp_trap
+    options:
+      service_address: "udp://:162"
+      path: '["/usr/share/snmp/mibs"]'
+      version: "2c"
+
+telegraf_plugins: "{{ telegraf_plugins_base | default([]) }} + {{ telegraf_plugins_extra | default([]) }}"
 
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
