@@ -60,6 +60,17 @@
   when: telegraf_runas_user != "telegraf" and not telegraf_sysvinit_script.stat.exists
   register: telegraf_unit_file_updated
 
+- name: Modify Telegraf to use ports < 1024
+  capabilities:
+    path: /usr/bin/telegraf
+    capability: cap_net_bind_service=+ep
+    state: present
+  notify:
+    - "restart telegraf"
+    - "pause"
+    - "check status"
+    - "assert running"
+
 - name: Reload systemd configuration [systemd]
   systemd:
     daemon_reload: yes
