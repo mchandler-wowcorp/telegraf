@@ -22,8 +22,10 @@ telegraf_metric_buffer_limit: "10000"
 telegraf_collection_jitter: 0s
 telegraf_flush_interval: 10s
 telegraf_flush_jitter: 0s
-telegraf_debug: "false"
+telegraf_debug: "true"
 telegraf_quiet: "false"
+telegraf_logtarget: "file"
+telegraf_logfile: "/var/log/telegraf/telegraf.log"  #FIXME: add config for log-rotation
 telegraf_hostname:
 telegraf_omit_hostname: "false"
 telegraf_install_url:
@@ -90,12 +92,12 @@ telegraf_influxdb_bucket:
 #       interfaces:
 #         - "eth0"
 
-telegraf_plugins_extras:
+telegraf_plugins_extra:
 ## Receive SNMP traps
   - name: snmp_trap
     options:
       service_address: "udp://:162"
-      path: '["/usr/share/snmp/mibs"]'
+      path: ["/usr/share/snmp/mibs"]
       version: "2c"
 
 telegraf_plugins: "{{ telegraf_plugins_base | default([]) }} + {{ telegraf_plugins_extra | default([]) }}"
