@@ -67,6 +67,18 @@
   ## Run telegraf in quiet mode
   quiet = {{ telegraf_quiet }}
 
+  ## Log target controls the destination for logs and can be one of "file",
+  ## "stderr" or, on Windows, "eventlog".  When set to "file", the output file
+  ## is determined by the "logfile" setting.
+  # logtarget = "file"
+  logtarget = "{{ telegraf_logtarget }}"
+
+  ## Name of the file to be logged to when using the "file" logtarget.  If set to
+  ## the empty string then logs are written to stderr.
+  # logfile = ""
+  logfile = "{{ telegraf_logfile }}"
+
+
   # Override default hostname, if empty use os.Hostname()
 {% if telegraf_hostname is defined and telegraf_hostname != None %}
   hostname = "{{ telegraf_hostname }}"
@@ -91,7 +103,7 @@
 [[outputs.http]]
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url }}
+   url = "{{ telegraf_http_url }}"
    data_format = "{{ telegraf_http_dataformat }}"
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
