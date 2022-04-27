@@ -34,13 +34,15 @@ telegraf_snmp_translator: "gosmi"
 # for http output
 # telegraf_splunk_hec_host and telegraf_splunk_hec_token should come from an ansible_vault
 telegraf_http: true
-telegraf_http_url: "https://{{ telegraf_splunk_hec_host }}/services/collector/raw?sourcetype=telegraf"
+telegraf_http_url: "https://{{ telegraf_splunk_hec_host }}/services/collector/raw?sourcetype="
 telegraf_http_dataformat: "splunkmetric"
 telegraf_http_splunkmetric_hec_routing: "true"
 telegraf_http_splunkmetric_multimetric: "false"
 telegraf_http_headers_ctype: "application/json"
 telegraf_http_headers_auth: "Splunk {{ telegraf_splunk_hec_token }}"
 telegraf_http_headers_xsrc: "snmpchannel"
+telegraf_http_sourcetype_snmp_ups_dc: "telegraf:snmp:ups:dc"
+telegraf_http_sourcetype_snmp_ups_store: "telegraf:snmp:ups:store"
 
 # for influxdb output
 telegraf_influxdb_v1: false
@@ -96,8 +98,17 @@ telegraf_plugins_extra:
 ## Receive SNMP traps
   - name: snmp_trap
     options:
-      service_address: "udp://:162"
       path: ["/usr/share/snmp/mibs"]
+      service_address: "udp://:162"
+      tags:
+        source_type: "telegraf:snmp:ups:dc"
+      version: "2c"
+  - name: snmp_trap
+    options:
+      path: ["/usr/share/snmp/mibs"]
+      service_address: "udp://:16162"
+      tags:
+        source_type: "telegraf:snmp:ups:store"
       version: "2c"
 
 telegraf_plugins: "{{ telegraf_plugins_base | default([]) }} + {{ telegraf_plugins_extra | default([]) }}"
