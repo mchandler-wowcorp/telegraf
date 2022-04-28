@@ -116,9 +116,9 @@
       Authorization = "{{ telegraf_http_headers_auth }}"
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
-   ## Only output events that have this tag which is set by the input
+   ## Only output events that have this tag which is set by the SNMP community string
     [outputs.http.tagpass]
-      source_type = ["{{ telegraf_http_sourcetype_snmp_ups_dc }}"]
+      community = ["{{ telegraf_snmp_community_ups_dc }}"]
 
 [[outputs.http]]
 
@@ -136,9 +136,9 @@
       Authorization = "{{ telegraf_http_headers_auth }}"
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
-   ## Only output events that have this tag which is set by the input
-    [outputs.http.tagpass]
-      source_type = ["{{ telegraf_http_sourcetype_snmp_ups_store }}"]
+   ## Do not output events that have this tag which is set by the SNMP community string
+    [outputs.http.tagdrop]
+      community = ["{{ telegraf_snmp_community_ups_dc }}"]
 
 {% endif %}
 
