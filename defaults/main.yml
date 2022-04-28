@@ -22,7 +22,7 @@ telegraf_metric_buffer_limit: "10000"
 telegraf_collection_jitter: 0s
 telegraf_flush_interval: 10s
 telegraf_flush_jitter: 0s
-telegraf_debug: "true"
+telegraf_debug: "false"
 telegraf_quiet: "false"
 telegraf_logtarget: "file"
 telegraf_logfile: "/var/log/telegraf/telegraf.log"  #FIXME: add config for log-rotation
@@ -33,7 +33,7 @@ telegraf_snmp_translator: "gosmi"
 
 # for http output
 # telegraf_splunk_hec_host and telegraf_splunk_hec_token should come from an ansible_vault
-telegraf_http: true
+telegraf_http: false
 telegraf_http_url: "https://{{ telegraf_splunk_hec_host }}/services/collector/raw?sourcetype="
 telegraf_http_dataformat: "splunkmetric"
 telegraf_http_splunkmetric_hec_routing: "true"
