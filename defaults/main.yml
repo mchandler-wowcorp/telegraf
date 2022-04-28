@@ -43,6 +43,7 @@ telegraf_http_headers_auth: "Splunk {{ telegraf_splunk_hec_token }}"
 telegraf_http_headers_xsrc: "snmpchannel"
 telegraf_http_sourcetype_snmp_ups_dc: "telegraf:snmp:ups:dc"
 telegraf_http_sourcetype_snmp_ups_store: "telegraf:snmp:ups:store"
+telegraf_snmp_community_ups_dc: "ups_dc"
 
 # for influxdb output
 telegraf_influxdb_v1: false
