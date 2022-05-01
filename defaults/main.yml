@@ -105,4 +105,6 @@ telegraf_plugins_extra:
 
 telegraf_plugins: "{{ telegraf_plugins_base | default([]) }} + {{ telegraf_plugins_extra | default([]) }}"
 
+telegraf_plugins_proc: "{{ telegraf_plugins_proc_user | default([]) }}"
+
 telegraf_influxdata_base_url: "https://repos.influxdata.com"
