@@ -263,7 +263,7 @@
 #                             processor PLUGINS                               #
 ###############################################################################
 
-{% for plugin in telegraf_proc_plugins %}
+{% for plugin in telegraf_plugins_proc %}
 [[processor.{{ plugin.name }}]]
 {% if plugin.options is defined %}
 {% for key, value in plugin.options.items() %}
