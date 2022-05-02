@@ -105,7 +105,7 @@
    ## URL is the address to send metrics to
    url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_dc }}"
    data_format = "{{ telegraf_http_dataformat }}"
-   use_batch_format = "{{ telegraf_http_batch }}"
+   use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
    splunkmetric_multimetric = "{{ telegraf_http_splunkmetric_multimetric }}"
@@ -126,7 +126,7 @@
    ## URL is the address to send metrics to
    url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_store }}"
    data_format = "{{ telegraf_http_dataformat }}"
-   use_batch_format = "{{ telegraf_http_batch }}"
+   use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
    splunkmetric_multimetric = "{{ telegraf_http_splunkmetric_multimetric }}"
