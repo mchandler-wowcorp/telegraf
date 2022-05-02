@@ -260,11 +260,11 @@
 {% endfor %}
 
 ###############################################################################
-#                             processor PLUGINS                               #
+#                             processors PLUGINS                               #
 ###############################################################################
 
-{% for plugin in telegraf_plugins_proc %}
-[[processor.{{ plugin.name }}]]
+{% for plugin in telegraf_plugins_procs %}
+[[processors.{{ plugin.name }}]]
 {% if plugin.options is defined %}
 {% for key, value in plugin.options.items() %}
 {% if value is not mapping %}
@@ -285,7 +285,7 @@
 {% endfor %}
 {% for key, value in plugin.options.items() %}
 {% if value is mapping %}
-    [processor.{{ plugin.name }}.{{ key }}]
+    [processors.{{ plugin.name }}.{{ key }}]
 {% for lv2_key, lv2_value in value.items() %}
 {% if lv2_value is sequence and lv2_value is not string %}
 {% if lv2_value[0] is number %}
