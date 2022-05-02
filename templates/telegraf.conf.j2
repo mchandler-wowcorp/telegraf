@@ -285,7 +285,7 @@
 {% endfor %}
 {% for key, value in plugin.options.items() %}
 {% if value is mapping %}
-    [processors.{{ plugin.name }}.{{ key }}]
+    [[processors.{{ plugin.name }}.{{ key }}]]
 {% for lv2_key, lv2_value in value.items() %}
 {% if lv2_value is sequence and lv2_value is not string %}
 {% if lv2_value[0] is number %}
