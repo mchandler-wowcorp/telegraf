@@ -181,7 +181,7 @@
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
    ## Do not output events that have this tag which is set by the SNMP community string
-    [outputs.http.telegraf_influxdb_retention_policy]
+    [outputs.http.tagdrop]
       community = ["{{ telegraf_snmp_community_ups_corp }}", "{{ telegraf_snmp_community_ups_dc }}", "{{ telegraf_snmp_community_ups_store }}"]
 
 {% endif %}
