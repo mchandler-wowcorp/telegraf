@@ -103,7 +103,7 @@
 [[outputs.http]]  # Solman
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + '&source=' + telegraf_http_sourcetype_snmp_solman }}"
+   url = "{{ telegraf_http_url_solman + '&source=' + telegraf_http_sourcetype_snmp_solman }}"
    data_format = "{{ telegraf_http_dataformat }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -124,7 +124,7 @@
 [[outputs.http]]  # UPS Corp
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_corp }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_corp }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -145,7 +145,7 @@
 [[outputs.http]]  # UPS DC
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_dc }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_dc }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -166,7 +166,7 @@
 [[outputs.http]]  # UPS Store
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_store }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_store }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -187,7 +187,7 @@
 [[outputs.http]]  # VMware
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
+   url = "{{ telegraf_http_url_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
    data_format = "{{ telegraf_http_dataformat_vmware }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -205,10 +205,10 @@
     [outputs.http.tagpass]
       community = ["{{ telegraf_snmp_community_vmware }}"]
 
-[[outputs.http]]
+[[outputs.http]]  # Unknown
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_unknown }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_unknown }}"  ## FIXME: use different URL var
    data_format = "{{ telegraf_http_dataformat }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
