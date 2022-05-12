@@ -103,7 +103,7 @@
 [[outputs.http]]  # Solman
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url_solman + '&source=' + telegraf_http_sourcetype_snmp_solman }}"
+   url = "{{ telegraf_http_url_solman + '&sourcetype=' + telegraf_http_sourcetype_snmp_solman + '&source=' + telegraf_http_source_snmp_solman }}"
    data_format = "{{ telegraf_http_dataformat_solman }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -187,7 +187,7 @@
 [[outputs.http]]  # VMware
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
+   url = "{{ telegraf_http_url_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
    data_format = "{{ telegraf_http_dataformat_vmware }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -208,8 +208,8 @@
 [[outputs.http]]  # Unknown
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_unknown }}"  ## FIXME: use different URL var
-   data_format = "{{ telegraf_http_dataformat }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_unknown + '&source=' + telegraf_http_source_snmp_unknown }}"  ## FIXME: use different URL var
+   data_format = "{{ telegraf_http_dataformat_unknown }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
