@@ -219,7 +219,7 @@
     [outputs.http.headers]
       # Should be set manually to "application/json" for json data_format
       Content-Type = "{{ telegraf_http_headers_ctype }}"
-      Authorization = "{{ telegraf_http_headers_auth }}"
+      Authorization = "{{ telegraf_http_headers_auth_unknown }}"
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
    ## Do not output events that have this tag which is set by the SNMP community string
