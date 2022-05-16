@@ -187,7 +187,7 @@
 [[outputs.http]]  # VMware
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
+   url = "{{ telegraf_http_url_vmware + '&sourcetype=' + telegraf_http_sourcetype_snmp_vmware + '&source=' + telegraf_http_source_snmp_vmware }}"
    data_format = "{{ telegraf_http_dataformat_vmware }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
