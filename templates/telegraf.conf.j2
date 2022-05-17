@@ -103,8 +103,8 @@
 [[outputs.http]]  # Solman
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + '&source=' + telegraf_http_sourcetype_snmp_solman }}"
-   data_format = "{{ telegraf_http_dataformat }}"
+   url = "{{ telegraf_http_url_solman + '&sourcetype=' + telegraf_http_sourcetype_snmp_solman + '&source=' + telegraf_http_source_snmp_solman }}"
+   data_format = "{{ telegraf_http_dataformat_solman }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
@@ -114,7 +114,7 @@
     [outputs.http.headers]
       # Should be set manually to "application/json" for json data_format
       Content-Type = "{{ telegraf_http_headers_ctype }}"
-      Authorization = "{{ telegraf_http_headers_auth }}"
+      Authorization = "{{ telegraf_http_headers_auth_solman }}"
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
    ## Only output events that have this tag which is set by the SNMP community string
@@ -124,7 +124,7 @@
 [[outputs.http]]  # UPS Corp
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_corp }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_corp }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -145,7 +145,7 @@
 [[outputs.http]]  # UPS DC
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_dc }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_dc }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -166,7 +166,7 @@
 [[outputs.http]]  # UPS Store
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_ups_store }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_ups_store }}"
    data_format = "{{ telegraf_http_dataformat_ups }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -187,7 +187,7 @@
 [[outputs.http]]  # VMware
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + '&source=' + telegraf_http_sourcetype_snmp_vmware }}"
+   url = "{{ telegraf_http_url_vmware + '&sourcetype=' + telegraf_http_sourcetype_snmp_vmware + '&source=' + telegraf_http_source_snmp_vmware }}"
    data_format = "{{ telegraf_http_dataformat_vmware }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
@@ -205,11 +205,11 @@
     [outputs.http.tagpass]
       community = ["{{ telegraf_snmp_community_vmware }}"]
 
-[[outputs.http]]
+[[outputs.http]]  # Unknown
 
    ## URL is the address to send metrics to
-   url = "{{ telegraf_http_url + telegraf_http_sourcetype_snmp_unknown }}"
-   data_format = "{{ telegraf_http_dataformat }}"
+   url = "{{ telegraf_http_url_ups + telegraf_http_sourcetype_snmp_unknown + '&source=' + telegraf_http_source_snmp_unknown }}"  ## FIXME: use different URL var
+   data_format = "{{ telegraf_http_dataformat_unknown }}"
    use_batch_format = {{ telegraf_http_batch }}
    ## Provides time, index, source overrides for the HEC
    splunkmetric_hec_routing = "{{ telegraf_http_splunkmetric_hec_routing }}"
@@ -219,7 +219,7 @@
     [outputs.http.headers]
       # Should be set manually to "application/json" for json data_format
       Content-Type = "{{ telegraf_http_headers_ctype }}"
-      Authorization = "{{ telegraf_http_headers_auth }}"
+      Authorization = "{{ telegraf_http_headers_auth_unknown }}"
       X-Splunk-Request-Channel = "{{ telegraf_http_headers_xsrc }}"
 
    ## Do not output events that have this tag which is set by the SNMP community string
