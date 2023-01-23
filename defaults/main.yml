@@ -96,6 +96,11 @@ telegraf_plugins_extra:
       path: ["/usr/share/snmp/mibs"]
       service_address: "udp://:162"
       version: "2c"
+  - name: snmp_trap
+    options:
+      path: ["/usr/share/snmp/mibs"]
+      service_address: "udp://:163"
+      version: "2c"
 
 telegraf_plugins: "{{ telegraf_plugins_base | default([]) + telegraf_plugins_extra | default([]) }}"
 
