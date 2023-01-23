@@ -216,7 +216,7 @@
    splunkmetric_multimetric = "{{ telegraf_http_splunkmetric_multimetric }}"
 
    ## Additional HTTP headers
-    [outputs.http.headers]enterprise
+    [outputs.http.headers]
       # Should be set manually to "application/json" for json data_format
       Content-Type = "{{ telegraf_http_headers_ctype }}"
       Authorization = "{{ telegraf_http_headers_auth_dclp }}"
